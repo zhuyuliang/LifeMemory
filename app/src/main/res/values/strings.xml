@@ -1,0 +1,41 @@
+<resources>
+    <!-- 我 IMe -->
+    <string name="app_name">IMe</string>
+
+    <string name="double_back_exit_hint">再按一次返回键退出应用</string>
+
+    <string name="toolbar_title">IMe</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="cancel">cancel</string>
+    <string name="ok">ok</string>
+    <string name="prompt">提示</string>
+
+    <!-- Drawer菜单选项 -->
+    <string name="everyface">Everyface</string>
+    <string name="more">More</string>
+    <string name="setting">Setting</string>
+    <string name="about">About</string>
+
+    <!-- CommonUtils.java -->
+    <string name="versionname_unknown">版本名称错误</string>
+
+    <!-- 云盘相关 -->
+    <string name="nav_username_yun_propert">登录我的云盘</string>
+
+    <!-- EveryFace -->
+    <string name="add_everyface_tag_title_str">创建EveryFace</string>
+    <string name="create_time_line_default">创建于：</string>
+    <string name="create_tag_title_hint">请输入标签名称</string>
+    <string name="create_tag_title_hint_example">例如:我的每天照...</string>
+    <string name="create_everyface_desc_hint">请输入备注</string>
+    <string name="create_everyface_desc_hint_example">例如:描述我这个标签的内容...</string>
+    <string name="done_str">完成</string>
+    <string name="add_str">添加标签</string>
+    <string name="add_edit_back_prompt_str">您确定要取消创建吗?</string>
+    <string name="input_null_str">您没有输入必要的标签名称!</string>
+    <string name="input_long_str">您输入的标签过长！</string>
+    <string name="repeat_create_str">您创建的标签重名了哦!</string>
+
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="AppMainTheme" parent="@style/AppBaseTheme">
+        <!-- 绘制 status bar 的背景 -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+</resources>

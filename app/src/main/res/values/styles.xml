@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/AppBaseTheme"></style>
+
+    <style name="AppThemeCamera" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 状态栏颜色 -->
+        <item name="colorPrimaryDark">@android:color/black</item>
+    </style>
+
+    <style name="Theme.AppStartLoad" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- 状态栏和标题栏颜色 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- 溢出菜单图标颜色 -->
+        <item name="colorControlNormal">@android:color/white</item>
+
+        <!-- 默认文字颜色 -->
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/text_second_color_primary</item>
+
+        <!-- 背景颜色 -->
+        <item name="android:windowBackground">@color/window_background</item>
+
+        <!-- 按键效果 -->
+        <item name="android:activatedBackgroundIndicator">@drawable/activated_background</item>
+
+    </style>
+
+    <!-- FloatingActionButton按键效果 -->
+    <style name="floatingactionbuttonstyle">
+        <item name="backgroundTint">@color/common_fbtn_color</item>
+        <item name="rippleColor">@color/red</item>
+        <item name="elevation">8dp</item>
+        <item name="pressedTranslationZ">6dp</item>
+    </style>
+
+    <style name="ContextMenuButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/btn_context_menu</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>
