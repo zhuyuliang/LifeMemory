@@ -1,112 +1,79 @@
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.zyl.melife.camera.view.AutoFitSurfaceView
+        android:id="@+id/sv_camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_alignParentTop="true"/>
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/black"
-            android:gravity="center_vertical"
-            android:padding="2dp">
+    <com.zyl.melife.camera.view.CameraGridView
+        android:id="@+id/grid_camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"/>
 
-        </RelativeLayout>
+    <com.zyl.melife.camera.view.FocusView
+        android:id="@+id/img_focus"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"/>
 
-        <FrameLayout
-            android:id="@+id/framelayout_camera"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff">
+    <com.zyl.melife.camera.view.AnimationTextView
+        android:id="@+id/txt_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"/>
 
-            <!-- 显示预览图形 -->
-            <SurfaceView
-                android:id="@+id/surfaceView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal" />
+    <com.zyl.melife.camera.view.GestureView
+        android:id="@+id/view_gesture"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
-            <RelativeLayout
-                android:id="@+id/buttonLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    <com.zyl.melife.camera.view.IsoView
+        android:id="@+id/pb_iso"
+        android:layout_width="wrap_content"
+        android:layout_height="150dip"/>
 
+    <com.zyl.melife.camera.view.MenuLayout
+    android:id="@+id/layout_menu"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-                <RelativeLayout
-                    android:id="@+id/camera_top"
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:layout_alignParentTop="true"
-                    android:background="#00000000">
+    <com.zyl.melife.camera.view.MainLayout
+        android:id="@+id/layout_camera_main"
+        android:layout_width="fill_parent"
+        android:layout_height="150dip"
+        android:layout_alignParentBottom="true">
+    </com.zyl.melife.camera.view.MainLayout>
 
-                    <ImageView
-                        android:id="@+id/flashBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_alignParentLeft="true"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:src="@mipmap/camera_flash_off" />
+    <com.zyl.melife.camera.view.PersonalLayout
+        android:id="@+id/layout_camera_personal"
+        android:layout_width="fill_parent"
+        android:layout_height="150dip"
+        android:layout_alignParentBottom="true">
+    </com.zyl.melife.camera.view.PersonalLayout>
 
-                    <ImageView
-                        android:id="@+id/change"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:paddingBottom="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:src="@mipmap/camera_flip" />
+    <com.zyl.melife.camera.view.ParamsLayout
+        android:id="@+id/layout_camera_params"
+        android:layout_width="fill_parent"
+        android:layout_height="150dip"
+        android:layout_alignParentBottom="true">
+    </com.zyl.melife.camera.view.ParamsLayout>
 
-                </RelativeLayout>
+    <View
+        android:id="@+id/view_cover"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        android:visibility="gone"/>
+</com.zyl.melife.camera.view.MenuLayout>
 
-                <com.zyl.melife.view.CameraGrid
-                    android:id="@+id/masking"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true" />
-
-                <View
-                    android:id="@+id/focus_index"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/cam_focus"
-                    android:visibility="invisible" />
-            </RelativeLayout>
-
-        </FrameLayout>
-
-        <RelativeLayout
-            android:id="@+id/panel_take_photo"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/black"
-            android:gravity="center_vertical"
-            android:padding="2dp">
-
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:padding="5dp"
-                android:src="@mipmap/camera_back" />
-
-            <Button
-                android:id="@+id/takepicture"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/btn_capture" />
-
-        </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

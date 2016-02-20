@@ -23,6 +23,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+
         <!-- 溢出菜单图标颜色 -->
         <item name="colorControlNormal">@android:color/white</item>
 
@@ -55,6 +59,107 @@
         <item name="android:paddingRight">20dp</item>
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- theme -->
+    <style name="ThemeBlue" parent="AppTheme">
+        <item name="colorPrimary">@color/blue_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/blue_colorPrimaryDark</item>
+        <item name="colorAccent">@color/blue_colorPrimaryDark</item>
+        <!--<item name="colorControlHighlight">@color/blue_colorPrimary</item>-->
+    </style>
+
+    <style name="ThemeIndigo" parent="AppTheme">
+        <item name="colorPrimary">@color/indigo_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/indigo_colorPrimaryDark</item>
+        <item name="colorAccent">@color/indigo_colorPrimaryDark</item>
+    </style>
+
+
+    <style name="ThemeCyan">
+        <item name="colorPrimary">@color/cyan_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/cyan_colorPrimaryDark</item>
+        <item name="colorAccent">@color/cyan_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeTeal">
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="colorPrimary">@color/teal_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/teal_colorPrimaryDark</item>
+        <item name="colorAccent">@color/teal_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeGreen">
+        <item name="colorPrimary">@color/green_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/green_colorPrimaryDark</item>
+        <item name="colorAccent">@color/green_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeLightGreen">
+        <item name="colorPrimary">@color/light_green_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/light_green_colorPrimaryDark</item>
+        <item name="colorAccent">@color/light_green_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeLime">
+        <item name="colorPrimary">@color/lime_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/lime_colorPrimaryDark</item>
+        <item name="colorAccent">@color/lime_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeYellow">
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="colorPrimary">@color/yellow_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/yellow_colorPrimaryDark</item>
+        <item name="colorAccent">@color/yellow_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeAmber">
+        <item name="colorPrimary">@color/amber_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/amber_colorPrimaryDark</item>
+        <item name="colorAccent">@color/amber_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeOrange">
+        <item name="colorPrimary">@color/orange_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/orange_colorPrimaryDark</item>
+        <item name="colorAccent">@color/orange_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeDeepOrange">
+        <item name="colorPrimary">@color/deep_orange_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/deep_orange_colorPrimaryDark</item>
+        <item name="colorAccent">@color/deep_orange_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeRed">
+        <item name="colorPrimary">@color/red_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/red_colorPrimaryDark</item>
+        <item name="colorAccent">@color/red_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemePurple">
+        <item name="colorPrimary">@color/purple_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/purple_colorPrimaryDark</item>
+        <item name="colorAccent">@color/purple_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeBrown">
+        <item name="colorPrimary">@color/brown_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/brown_colorPrimaryDark</item>
+        <item name="colorAccent">@color/brown_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeGray">
+        <item name="colorPrimary">@color/gray_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/gray_colorPrimaryDark</item>
+        <item name="colorAccent">@color/gray_colorPrimaryDark</item>
+    </style>
+
+    <style name="ThemeBlueGray">
+        <item name="colorPrimary">@color/blue_gray_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/blue_gray_colorPrimaryDark</item>
+        <item name="colorAccent">@color/blue_gray_colorPrimaryDark</item>
     </style>
 
 </resources>

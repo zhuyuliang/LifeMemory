@@ -61,8 +61,24 @@ public class EveryFaceContextMenuManager extends RecyclerView.OnScrollListener i
                     return false;
                 }
             });
+            contextMenuView.getViewTreeObserver().addOnGlobalFocusChangeListener(ogfclintener);
+            contextMenuView.getViewTreeObserver().addOnWindowFocusChangeListener(owfclintener);
+
         }
     }
+
+    ViewTreeObserver.OnGlobalFocusChangeListener ogfclintener =  new ViewTreeObserver.OnGlobalFocusChangeListener() {
+        @Override
+        public void onGlobalFocusChanged(View oldFocus, View newFocus) {
+            hideContextMenu();
+        }
+    };
+    ViewTreeObserver.OnWindowFocusChangeListener owfclintener = new ViewTreeObserver.OnWindowFocusChangeListener() {
+        @Override
+        public void onWindowFocusChanged(boolean hasFocus) {
+            hideContextMenu();
+        }
+    };
 
     private void setupContextMenuInitialPosition(View openingView) {
         final int[] openingViewLocation = new int[2];
@@ -113,6 +129,9 @@ public class EveryFaceContextMenuManager extends RecyclerView.OnScrollListener i
                         isContextMenuDismissing = false;
                     }
                 });
+        contextMenuView.getViewTreeObserver().removeOnGlobalFocusChangeListener(ogfclintener);
+        contextMenuView.getViewTreeObserver().removeOnWindowFocusChangeListener(owfclintener);
+
     }
 
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -122,13 +141,14 @@ public class EveryFaceContextMenuManager extends RecyclerView.OnScrollListener i
         }
     }
 
+
     @Override
     public void onViewAttachedToWindow(View v) {
-
     }
 
     @Override
     public void onViewDetachedFromWindow(View v) {
         contextMenuView = null;
     }
+
 }

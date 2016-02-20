@@ -69,9 +69,12 @@ public class EveryFaceContextMenu extends LinearLayout {
         }
     }
 
+
     public void setOnEveryFaceMenuItemClickListener(OnEveryFaceContextMenuItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
+
 
     public interface OnEveryFaceContextMenuItemClickListener {
         public void onSharePhotoClick(int everyfaceItem);
