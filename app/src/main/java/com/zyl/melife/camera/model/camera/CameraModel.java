@@ -15,7 +15,7 @@ import com.zyl.melife.R;
 import com.zyl.melife.camera.model.AbsCameraModel;
 import com.zyl.melife.camera.model.ICameraFocus;
 import com.zyl.melife.camera.model.ICameraSetting;
-import com.zyl.melife.utils.YLog;
+import com.zyl.melife.utils.LogUtils;
 
 import java.io.IOException;
 
@@ -54,7 +54,7 @@ public class CameraModel extends AbsCameraModel {
     @Override
     public void openCamera(String id, int orientation) {
         if (mCamera != null) {
-            YLog.e(TAG, "相机已经开启");
+            LogUtils.e(TAG, "相机已经开启");
             return;
         }
         try {
@@ -85,7 +85,7 @@ public class CameraModel extends AbsCameraModel {
     public void reopenCamera(String id, int orientation) {
         if (mCamera == null) {
             //当相机开启失败失败，那么其他操作都不作处理
-            YLog.i(TAG, "reopenCamera,当相机开启失败失败，那么其他操作都不作处理");
+            LogUtils.i(TAG, "reopenCamera,当相机开启失败失败，那么其他操作都不作处理");
             return;
         }
         if (mCurrentCameraId.equals(id) || mCamera == null) {
@@ -95,7 +95,7 @@ public class CameraModel extends AbsCameraModel {
         if (mCameraState == STATE_CAMERA_PREVIEW_NORMAL) {
             mCamera.stopPreview();
         }
-        YLog.i(TAG, "reopenCamera,mCamera.release();");
+        LogUtils.i(TAG, "reopenCamera,mCamera.release();");
         mCamera.release();
         mCamera = null;
         destroySettingModel();
@@ -108,12 +108,12 @@ public class CameraModel extends AbsCameraModel {
     public void startPreview() {
         if (mCamera == null) {
             //当相机开启失败失败，那么其他操作都不作处理
-            YLog.i(TAG, "startPreview,当相机开启失败失败，那么其他操作都不作处理");
+            LogUtils.i(TAG, "startPreview,当相机开启失败失败，那么其他操作都不作处理");
             return;
         }
         if (mCameraState == STATE_CAMERA_PREVIEW_NORMAL) {
             //已经开启预览了，再调用也没得啥子用
-            YLog.i(TAG, "已经开启预览了，再调用也没得啥子用");
+            LogUtils.i(TAG, "已经开启预览了，再调用也没得啥子用");
             return;
         }
         if (mCameraState != STATE_CAMERA_OPEN) {
@@ -134,7 +134,7 @@ public class CameraModel extends AbsCameraModel {
     public void stopPreview() {
         if (mCamera == null) {
             //当相机开启失败失败，那么其他操作都不作处理
-            YLog.i(TAG, "stopPreview,当相机开启失败失败，那么其他操作都不作处理");
+            LogUtils.i(TAG, "stopPreview,当相机开启失败失败，那么其他操作都不作处理");
             return;
         }
         if (mCameraState == STATE_CAMERA_PREVIEW_NORMAL) {
@@ -148,7 +148,7 @@ public class CameraModel extends AbsCameraModel {
     public void closeCamera() {
         if (mCamera == null) {
             //当相机开启失败失败，那么其他操作都不作处理
-            YLog.i(TAG, "closeCamera,当相机开启失败失败，那么其他操作都不作处理");
+            LogUtils.i(TAG, "closeCamera,当相机开启失败失败，那么其他操作都不作处理");
             return;
         }
         if (mCameraState == STATE_CAMERA_PREVIEW_NORMAL) {
@@ -172,7 +172,7 @@ public class CameraModel extends AbsCameraModel {
                 Toast.makeText(mContext, mContext.getResources().getString(R.string.toast_fail), Toast.LENGTH_SHORT).show();
             }
         } else {
-            YLog.i(TAG, "capture  focusState--->" + getFocusModel().getFocusState() + "   CameraState--->" + mCameraState);
+            LogUtils.i(TAG, "capture  focusState--->" + getFocusModel().getFocusState() + "   CameraState--->" + mCameraState);
         }
         return time;
     }
@@ -230,7 +230,7 @@ public class CameraModel extends AbsCameraModel {
     @Override
     public ICameraSetting getSettingModel() {
         if (mCamera == null) {
-            YLog.e(TAG, "相机还没有开启，拿不到");
+            LogUtils.e(TAG, "相机还没有开启，拿不到");
             return null;
         }
 //        synchronized (this) {
@@ -247,7 +247,7 @@ public class CameraModel extends AbsCameraModel {
             throw new IllegalArgumentException("必须得传入view的大小，通过setTouchArea");
         }
         if (mCamera == null) {
-            YLog.e(TAG, "相机还没有开启，拿不到");
+            LogUtils.e(TAG, "相机还没有开启，拿不到");
             return null;
         }
 //        synchronized (this) {

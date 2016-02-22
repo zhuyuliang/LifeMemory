@@ -28,10 +28,11 @@ public class Const {
 	 * 文件保存路径
 	 */
 	// 默认存放图片的路径
-    public final static String DEFAULT_SAVE_IMAGE_PATH = Environment.getExternalStorageDirectory()
+    public final static String DEFAULT_SAVE_PATH = Environment.getExternalStorageDirectory()
             + File.separator
             + "IMe"
-            + File.separator + "img" + File.separator;
+            + File.separator;
+    public final static String DEFAULT_SAVE_IMAGE_PATH = DEFAULT_SAVE_PATH + "img" + File.separator;
 
 
     /* intent */

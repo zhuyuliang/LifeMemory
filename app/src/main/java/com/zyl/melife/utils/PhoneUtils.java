@@ -87,7 +87,7 @@ public class PhoneUtils {
             var1[1] = var3;
             return var1;
         } catch (Exception var4) {
-            YLog.e(TAG, "Could not read gpu infor:--->" + var4);
+            LogUtils.e(TAG, "Could not read gpu infor:--->" + var4);
             return new String[0];
         }
     }
@@ -106,11 +106,11 @@ public class PhoneUtils {
                     var2.close();
                     var1.close();
                 } catch (IOException var4) {
-                    YLog.e(TAG, "Could not read from file /proc/cpuinfo--->" + var4);
+                    LogUtils.e(TAG, "Could not read from file /proc/cpuinfo--->" + var4);
                 }
             }
         } catch (FileNotFoundException var5) {
-            YLog.e(TAG, "Could not open file /proc/cpuinfo--->" + var5);
+            LogUtils.e(TAG, "Could not open file /proc/cpuinfo--->" + var5);
         }
 
         if (var0 != null) {
@@ -124,7 +124,7 @@ public class PhoneUtils {
     public static String getDeiceId(Context var0) {
         TelephonyManager var1 = (TelephonyManager) var0.getSystemService(Context.TELEPHONY_SERVICE);
         if (var1 == null) {
-            YLog.e(TAG, "No IMEI.");
+            LogUtils.e(TAG, "No IMEI.");
         }
 
         String var2 = "";
@@ -134,16 +134,16 @@ public class PhoneUtils {
                 var2 = var1.getDeviceId();
             }
         } catch (Exception var4) {
-            YLog.e(TAG, "No IMEI.--->" + var4);
+            LogUtils.e(TAG, "No IMEI.--->" + var4);
         }
 
         if (TextUtils.isEmpty(var2)) {
-            YLog.e(TAG, "No IMEI.");
+            LogUtils.e(TAG, "No IMEI.");
             var2 = getMacAddress(var0);
             if (TextUtils.isEmpty(var2)) {
-                YLog.e(TAG, "Failed to take mac as IMEI. Try to use Secure.ANDROID_ID instead.");
+                LogUtils.e(TAG, "Failed to take mac as IMEI. Try to use Secure.ANDROID_ID instead.");
                 var2 = Settings.Secure.getString(var0.getContentResolver(), "android_id");
-                YLog.e(TAG, "getDeviceId: Secure.ANDROID_ID: " + var2);
+                LogUtils.e(TAG, "getDeviceId: Secure.ANDROID_ID: " + var2);
                 return var2;
             }
         }
@@ -204,7 +204,7 @@ public class PhoneUtils {
                 return var2.getTimeZone().getRawOffset() / 3600000;
             }
         } catch (Exception var3) {
-            YLog.e(TAG, "error in getTimeZone--->" + var3);
+            LogUtils.e(TAG, "error in getTimeZone--->" + var3);
         }
 
         return 8;
@@ -230,7 +230,7 @@ public class PhoneUtils {
 
             return var1;
         } catch (Exception var3) {
-            YLog.e(TAG, "error in getLocaleInfo--->" + var3);
+            LogUtils.e(TAG, "error in getLocaleInfo--->" + var3);
             return var1;
         }
     }
@@ -245,7 +245,7 @@ public class PhoneUtils {
                 var1 = var2.locale;
             }
         } catch (Exception var3) {
-            YLog.e(TAG, "fail to read user config locale");
+            LogUtils.e(TAG, "fail to read user config locale");
         }
 
         if (var1 == null) {
@@ -267,10 +267,10 @@ public class PhoneUtils {
                     return var4.trim();
                 }
 
-                YLog.e(TAG, "Could not read UMENG_APPKEY meta-data from AndroidManifest.xml.");
+                LogUtils.e(TAG, "Could not read UMENG_APPKEY meta-data from AndroidManifest.xml.");
             }
         } catch (Exception var5) {
-            YLog.e(TAG, "Could not read UMENG_APPKEY meta-data from AndroidManifest.xml.--->" + var5);
+            LogUtils.e(TAG, "Could not read UMENG_APPKEY meta-data from AndroidManifest.xml.--->" + var5);
         }
 
         return null;
@@ -284,9 +284,9 @@ public class PhoneUtils {
                 return var2.getMacAddress();
             }
 
-            YLog.e(TAG, "Could not get mac address.[no permission android.permission.ACCESS_WIFI_STATE");
+            LogUtils.e(TAG, "Could not get mac address.[no permission android.permission.ACCESS_WIFI_STATE");
         } catch (Exception var3) {
-            YLog.e(TAG, "Could not get mac address." + var3.toString());
+            LogUtils.e(TAG, "Could not get mac address." + var3.toString());
         }
 
         return "";
@@ -315,7 +315,7 @@ public class PhoneUtils {
             var5.append(var4);
             return var5.toString();
         } catch (Exception var6) {
-            YLog.e(TAG, "read resolution fail--->" + var6);
+            LogUtils.e(TAG, "read resolution fail--->" + var6);
             return "Unknown";
         }
     }
@@ -344,12 +344,12 @@ public class PhoneUtils {
                     if (var5 != null) {
                         var1 = var5;
                     } else {
-                        YLog.i(TAG, "Could not read UMENG_CHANNEL meta-data from AndroidManifest.xml.");
+                        LogUtils.i(TAG, "Could not read UMENG_CHANNEL meta-data from AndroidManifest.xml.");
                     }
                 }
             }
         } catch (Exception var6) {
-            YLog.e(TAG, "Could not read UMENG_CHANNEL meta-data from AndroidManifest.xml.");
+            LogUtils.e(TAG, "Could not read UMENG_CHANNEL meta-data from AndroidManifest.xml.");
             var6.printStackTrace();
         }
 

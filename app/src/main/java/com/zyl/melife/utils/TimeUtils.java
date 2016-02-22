@@ -59,7 +59,6 @@ public class TimeUtils {
 
     /**
      * get current time in milliseconds
-     *
      * @return
      */
     public static String getCurrentTimeInString(SimpleDateFormat dateFormat) {
