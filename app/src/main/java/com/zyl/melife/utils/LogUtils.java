@@ -18,21 +18,31 @@ package com.zyl.melife.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.zyl.melife.global.Const;
+import com.zyl.melife.utils.thread.Runtask;
+import com.zyl.melife.utils.thread.ThreadPool;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.logging.Logger;
+
 /**
- * Log工具，类似android.util.Log。
+ * Log工具. 1.根据需求可以简化LOG标签。2.设置本地日志文件保存。3.设置总开关--在配置文件中，也可以对单独的日志级别做开关
  * tag自动产生，格式: customTagPrefix:className.methodName(L:lineNumber),
  * customTagPrefix为空时只输出：className.methodName(L:lineNumber)。
- * <p/>
- * Author: wyouflf
- * Date: 13-7-24
- * Time: 下午12:23
+ * Author: zhuyuliang email:zhuyuliang0@126.com
+ * Date: 15-2-22
  */
 public class LogUtils {
 
-    public static String customTagPrefix = "";
-
-    private LogUtils() {
+    public static void initLog(){
+        //不能做复杂耗时的操作
+        //设置总开关--在配置文件中
     }
+
+    public static String customTagPrefix = "";
 
     public static boolean allowD = true;
     public static boolean allowE = true;
@@ -41,6 +51,18 @@ public class LogUtils {
     public static boolean allowW = true;
     public static boolean allowWtf = true;
 
+    /**
+     * 是否在客户端记录用户操作
+     */
+    public static boolean logFile = false;
+
+    private static String logFilePath  = Const.DEFAULT_SAVE_PATH + "log" + File.separator;
+
+    /**
+     * 获取TAG标签内容
+     * @param caller
+     * @return
+     */
     private static String generateTag(StackTraceElement caller) {
         String tag = "%s.%s(L:%d)";
         String callerClazzName = caller.getClassName();
@@ -50,205 +72,344 @@ public class LogUtils {
         return tag;
     }
 
-    public static CustomLogger customLogger;
-
-    public interface CustomLogger {
-        void d(String tag, String content);
-
-        void d(String tag, String content, Throwable tr);
-
-        void e(String tag, String content);
-
-        void e(String tag, String content, Throwable tr);
-
-        void i(String tag, String content);
-
-        void i(String tag, String content, Throwable tr);
-
-        void v(String tag, String content);
-
-        void v(String tag, String content, Throwable tr);
-
-        void w(String tag, String content);
-
-        void w(String tag, String content, Throwable tr);
-
-        void w(String tag, Throwable tr);
-
-        void wtf(String tag, String content);
-
-        void wtf(String tag, String content, Throwable tr);
-
-        void wtf(String tag, Throwable tr);
-    }
-
+    /**
+     * DEBUG
+     */
     public static void d(String content) {
-        if (!allowD) return;
+        if ((!allowD)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.d(tag, content);
-        } else {
+        if (allowD) {
             Log.d(tag, content);
         }
+        if(logFile){
+            writeLog(tag, content, null, "DEBUG");
+        }
     }
-
+    public static void d(String tag,String content) {
+        if (allowD) {
+            Log.d(tag, content);
+        }
+        if(logFile){
+            writeLog(tag, content, null, "DEBUG");
+        }
+    }
     public static void d(String content, Throwable tr) {
-        if (!allowD) return;
+        if ((!allowD)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.d(tag, content, tr);
-        } else {
+        if (allowD) {
             Log.d(tag, content, tr);
         }
+        if(logFile){
+            writeLog(tag, content, tr, "DEBUG");
+        }
+    }
+    public static void d(String tag,String content, Throwable tr) {
+        if (allowD) {
+            Log.d(tag, content, tr);
+        }
+        if(logFile){
+            writeLog(tag, content, tr, "DEBUG");
+        }
     }
 
+    /**
+     * ERROR
+     */
     public static void e(String content) {
-        if (!allowE) return;
+        if ((!allowE)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.e(tag, content);
-        } else {
+        if (allowE) {
             Log.e(tag, content);
         }
+        if(logFile){
+            writeLog(tag, content, null, "ERROR");
+        }
     }
-
+    public static void e(String tag,String content) {
+        if (allowE) {
+            Log.e(tag, content);
+        }
+        if(logFile){
+            writeLog(tag, content, null, "ERROR");
+        }
+    }
     public static void e(String content, Throwable tr) {
-        if (!allowE) return;
+        if ((!allowE)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.e(tag, content, tr);
-        } else {
+        if (allowE) {
             Log.e(tag, content, tr);
         }
+        if(logFile){
+            writeLog(tag, content, tr, "ERROR");
+        }
+    }
+    public static void e(String tag,String content, Throwable tr) {
+        if (allowE) {
+            Log.e(tag, content, tr);
+        }
+        if(logFile){
+            writeLog(tag, content, tr, "ERROR");
+        }
     }
 
+    /**
+     * INFO
+     */
     public static void i(String content) {
-        if (!allowI) return;
+        if ((!allowI)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.i(tag, content);
-        } else {
+        if (allowI) {
             Log.i(tag, content);
         }
+        if(logFile){
+            writeLog(tag, content, null, "INFO");
+        }
     }
-
+    public static void i(String tag,String content) {
+        if (allowI) {
+            Log.i(tag, content);
+        }
+        if(logFile){
+            writeLog(tag, content, null, "INFO");
+        }
+    }
     public static void i(String content, Throwable tr) {
-        if (!allowI) return;
+        if ((!allowI)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.i(tag, content, tr);
-        } else {
+        if (allowI) {
             Log.i(tag, content, tr);
         }
+        if(logFile){
+            writeLog(tag, content, tr, "INFO");
+        }
+    }
+    public static void i(String tag,String content, Throwable tr) {
+        if (allowI) {
+            Log.i(tag, content, tr);
+        }
+        if(logFile){
+            writeLog(tag, content, tr, "INFO");
+        }
     }
 
+    /**
+     * VERBOSE
+     */
     public static void v(String content) {
-        if (!allowV) return;
+        if ((!allowV)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.v(tag, content);
-        } else {
+        if (allowV) {
             Log.v(tag, content);
         }
+        if(logFile){
+            writeLog(tag, content, null, "INFO");
+        }
     }
-
+    public static void v(String tag,String content) {
+        if (allowV) {
+            Log.v(tag, content);
+        }
+        if(logFile){
+            writeLog(tag, content, null, "INFO");
+        }
+    }
     public static void v(String content, Throwable tr) {
-        if (!allowV) return;
+        if ((!allowV)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.v(tag, content, tr);
-        } else {
+        if (allowV) {
             Log.v(tag, content, tr);
         }
+        if(logFile){
+            writeLog(tag, content, tr, "INFO");
+        }
+    }
+    public static void v(String tag,String content, Throwable tr) {
+        if (allowV) {
+            Log.v(tag, content, tr);
+        }
+        if(logFile){
+            writeLog(tag, content, tr, "INFO");
+        }
     }
 
+    /**
+     * WARN
+     */
     public static void w(String content) {
-        if (!allowW) return;
+        if ((!allowW)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.w(tag, content);
-        } else {
+        if (allowW) {
             Log.w(tag, content);
         }
+        if(logFile){
+            writeLog(tag, content, null, "WARN");
+        }
     }
-
-    public static void w(String content, Throwable tr) {
-        if (!allowW) return;
-        StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
-        String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.w(tag, content, tr);
-        } else {
+    public static void w(String tag,String content) {
+        if (allowW) {
+            Log.w(tag, content);
+        }
+        if(logFile){
+            writeLog(tag, content, null, "WARN");
+        }
+    }
+    public static void w(String tag,String content, Throwable tr) {
+        if (allowW) {
             Log.w(tag, content, tr);
         }
+        if(logFile){
+            writeLog(tag, content, tr, "WARN");
+        }
     }
-
     public static void w(Throwable tr) {
-        if (!allowW) return;
+        if ((!allowW)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.w(tag, tr);
-        } else {
+        if (allowW) {
             Log.w(tag, tr);
         }
+        if(logFile){
+            writeLog(tag, "", tr, "WARN");
+        }
+    }
+    public static void w(String tag,Throwable tr) {
+        if (allowW) {
+            Log.w(tag, tr);
+        }
+        if(logFile){
+            writeLog(tag, "", tr, "WARN");
+        }
     }
 
-
+    /**
+     * android.util.Log.wtf()
+     */
     public static void wtf(String content) {
-        if (!allowWtf) return;
+        if ((!allowWtf)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.wtf(tag, content);
-        } else {
-            Log.wtf(tag, content);
+        if (allowWtf) {
+            Log.w(tag, content);
+        }
+        if(logFile){
+            writeLog(tag, content, null, "WTF");
         }
     }
-
-    public static void wtf(String content, Throwable tr) {
-        if (!allowWtf) return;
-        StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
-        String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.wtf(tag, content, tr);
-        } else {
-            Log.wtf(tag, content, tr);
+    public static void wtf(String tag,String content) {
+        if (allowWtf) {
+            Log.w(tag, content);
+        }
+        if(logFile){
+            writeLog(tag, content, null, "WTF");
         }
     }
-
+    public static void wtf(String tag,String content, Throwable tr) {
+        if (allowWtf) {
+            Log.w(tag, content,tr);
+        }
+        if(logFile){
+            writeLog(tag, content, tr, "WTF");
+        }
+    }
     public static void wtf(Throwable tr) {
-        if (!allowWtf) return;
+        if ((!allowWtf)&&(!logFile))return;
         StackTraceElement caller = CommonUtils.getCallerStackTraceElement();
         String tag = generateTag(caller);
-
-        if (customLogger != null) {
-            customLogger.wtf(tag, tr);
-        } else {
-            Log.wtf(tag, tr);
+        if (allowWtf) {
+            Log.w(tag,tr);
         }
+        if(logFile){
+            writeLog(tag, "", tr, "WTF");
+        }
+    }
+    public static void wtf(String tag,Throwable tr) {
+        if (allowWtf) {
+            Log.w(tag,tr);
+        }
+        if(logFile){
+            writeLog(tag, "", tr, "WTF");
+        }
+    }
+
+    /**
+     * 记录日志线程
+     * @param tag
+     * @param msg
+     * @param tr
+     * @param priority
+     */
+    private static void writeLog(String tag, String msg, Throwable tr, String priority){
+        ThreadPool.go(new Runtask<Void, Void>(tag, msg, tr, priority) {
+            @Override
+            public Void runInBackground() {
+                synchronized (Logger.class) {
+                    String tag = (String) objs[0];
+                    String msg = (String) objs[1];
+                    Throwable tr = (Throwable) objs[2];
+                    String priority = (String) objs[3];
+
+                    if (!logFilePath.endsWith(File.separator)) {
+                        logFilePath = logFilePath + File.separator;
+                    }
+
+                    String filename = logFilePath
+                            + TimeUtils.getTime(System.currentTimeMillis(), TimeUtils.DATE_FORMAT_DATE)
+                            + ".log";
+                    File logFile = new File(filename);
+
+                    OutputStream os = null;
+                    try {
+                        if (!logFile.exists()) {
+                            logFile.createNewFile();
+                        }
+
+                        os = new FileOutputStream(logFile, true);
+
+                        String formatMsg = TimeUtils.getTime(System.currentTimeMillis()) + "\r\n[" + priority + "][" + tag + "]: \r\n"
+                                + "User Message: " + msg + "\r\n"
+                                + (null == tr ? "" :
+
+                                "Throwable Message: " + tr.getMessage() + "\r\n"
+                                        + "Throwable StackTrace: " + transformStackTrace(tr.getStackTrace())
+                        )
+                                + "\r\n";
+
+                        os.write(formatMsg.getBytes("utf-8"));
+                        os.flush();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    } finally {
+                        if (null != os) {
+                            try {
+                                os.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+
+                }
+                return null;
+            }
+        });
+
+    }
+    public static StringBuilder transformStackTrace(StackTraceElement[] elements){
+        StringBuilder sb = new StringBuilder();
+        for(StackTraceElement element : elements){
+            sb.append(element.toString()).append("\r\n");
+        }
+        return sb;
     }
 
 }
